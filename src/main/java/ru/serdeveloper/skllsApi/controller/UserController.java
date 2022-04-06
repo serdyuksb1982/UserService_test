@@ -53,11 +53,7 @@ public class UserController {
 
         user.getRoles().clear();
 
-        for (String key : form.keySet()) {
-            if (roles.contains(key)) {
-                user.getRoles().add(Role.valueOf(key));
-            }
-        }
+        form.keySet().stream().filter(roles::contains).forEach(key -> user.getRoles().add(Role.valueOf(key)));
 
         userRepo.save(user);
 
