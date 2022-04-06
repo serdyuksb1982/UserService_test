@@ -9,9 +9,7 @@ import ru.serdeveloper.skllsApi.domian.Role;
 import ru.serdeveloper.skllsApi.domian.User;
 import ru.serdeveloper.skllsApi.repository.UserRepo;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,16 +17,15 @@ import java.util.stream.Collectors;
  */
 @Controller
 @RequestMapping("/user")
-@PreAuthorize("hasAuthority('ADMIN'")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
 
     @Autowired
     private UserRepo userRepo;
 
     @GetMapping
-    private String userList(Model model) {
+    public String userList(Model model) {
         model.addAttribute("users", userRepo.findAll());
-        model.addAttribute("filter", "");
         return "userList";
     }
 
@@ -39,7 +36,6 @@ public class UserController {
     {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
-        model.addAttribute("filter", "");
         return "userEdit";
     }
 
@@ -47,18 +43,22 @@ public class UserController {
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user) {
-
+            @RequestParam("userId") User user
+    ) {
         user.setUsername(username);
+
         Set<String> roles = Arrays.stream(Role.values())
-                .map(Role::name).collect(Collectors.toSet());
+                .map(Role::name)
+                .collect(Collectors.toSet());
+
         user.getRoles().clear();
 
-        for(String key : form.keySet()) {
-            if(roles.contains(key)) {
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
                 user.getRoles().add(Role.valueOf(key));
             }
         }
+
         userRepo.save(user);
 
         return "redirect:/user";

@@ -12,6 +12,7 @@ public class Message {
     private Integer id;
 
     private String text;
+
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -28,7 +29,7 @@ public class Message {
     }
 
     public String getAuthorName() {
-        return author != null ? author.getUsername() : "&lt;none&gt;";
+        return author != null ? author.getUsername() : "none";
     }
 
     public User getAuthor() {
