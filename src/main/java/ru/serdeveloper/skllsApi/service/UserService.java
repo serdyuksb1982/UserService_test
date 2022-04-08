@@ -21,7 +21,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepo userRepo;
 
-    @Autowired MailSandler mailSandler;
+    @Autowired
+    MailSandlerService mailSandler;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
