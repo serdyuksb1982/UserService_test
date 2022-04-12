@@ -57,7 +57,9 @@ public class UserService implements UserDetailsService {
             return false;
         }
         user.setActivationCode(null);
+
         userRepo.save(user);
+
         return false;
     }
 }

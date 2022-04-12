@@ -29,9 +29,10 @@ public class RegistrationController {
 
         if (!userService.addUser(user)) {
             model.put("message", "User exists!");
+
             return "registration";
         }
-
+        model.put("filter", "");
         return "redirect:/login";
     }
 

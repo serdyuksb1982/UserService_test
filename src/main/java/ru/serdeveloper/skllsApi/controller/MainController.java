@@ -36,6 +36,11 @@ public class MainController {
         return "greeting";
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
     @GetMapping("/main")
     public String main(@RequestParam(required = false,
                         defaultValue = "") String filter,
