@@ -38,7 +38,7 @@ public class RegistrationController {
 
     @GetMapping("/activate/{code}")
     public String activate(Model model, @PathVariable String code) {
-        boolean isActivated = userService.activatedUser(code);
+        boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
             model.addAttribute("message", "User successfully activated");

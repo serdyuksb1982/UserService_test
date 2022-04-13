@@ -17,7 +17,7 @@
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <input type="text" class="form-control" name="text" placeholder="Введите сообщение " />
+                <input type="text" class="form-control" name="text" placeholder="Введите сообщение" />
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" name="tag" placeholder="Тэг">
@@ -41,17 +41,17 @@
     <div class="card my-3">
         <#if message.filename??>
         <img src="/img/${message.filename}" class="card-img-top">
-        </#if>
-        <div class="m-2">
-            <span>${message.text}</span>
-            <i>${message.tag}</i>
-        </div>
-        <div class="card-footer text-muted">
-            ${message.authorName}
-        </div>
+    </#if>
+    <div class="m-2">
+        <span>${message.text}</span>
+        <i>${message.tag}</i>
     </div>
-    <#else>
-    No message
-    </#list>
+    <div class="card-footer text-muted">
+        ${message.authorName}
+    </div>
+</div>
+<#else>
+No message
+</#list>
 </div>
 </@c.page>

@@ -1,5 +1,8 @@
 package ru.serdeveloper.skllsApi.configure;
 
+/**
+ * @author Serdyuk S.B.
+ */
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +44,12 @@ public class MailConfig {
 
         properties.setProperty("mail.transport.protocol", protocol);
         properties.setProperty("mail.debug", debug);
-
+        properties.setProperty("mail.transport.protocol", "smtp");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+        properties.setProperty("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         return mailSender;
     }
 }

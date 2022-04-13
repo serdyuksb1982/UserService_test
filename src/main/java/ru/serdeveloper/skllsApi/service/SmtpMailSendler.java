@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @author Serdyuk S.B.
  */
 @Service
-public class MailSandlerService {
+public class SmtpMailSendler {
     @Autowired
     private JavaMailSender mailSender;
 
