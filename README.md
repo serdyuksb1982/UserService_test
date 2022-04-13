@@ -17,4 +17,10 @@ Java 15, Intellij Idea, maven, mysql (временно, заменю на postgr
 
 Spring Boot Web Application (MVC): Добавляем панель администрирования пользователей и управляем правами доступа пользователей с помощью аннотации hasAuthority из Spring Security (user, admin). Cписок ролей (enum Role) и страницу, отображающую список пользователей приложения. 
 @PreAuthorize("hasAuthority('ADMIN')") ограничит доступ к панели администратора и оставит его только для пользователей с ролью ADMIN. Но эта аннотация не будет работать до добавления конфигурационной аннотации.
-@EnableGlobalMethodSecurity(prePostEnabled = true) На класс конфигурации WebSecurityConfig
+@EnableGlobalMethodSecurity(prePostEnabled = true) На класс конфигурации WebSecurityConfig/
+
+Api представляет собой чат. Функции: регистрация пользователей, отправка сообщений, фильтрация сообщений по тегам. Роли USER и ADMIN. ADMIN может менять роли, просматривать список ролей.
+
+Добавлена аутентификация на основе почты (Gimail).
+
+Миграция базы данных в mySQL на основе flywaydb.
