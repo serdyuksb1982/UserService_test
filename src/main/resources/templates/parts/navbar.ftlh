@@ -10,19 +10,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">HOME</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/main">Messages</a>
+                <a class="nav-link" href="/main">MESSAGES</a>
             </li>
             <#if isAdmin>
             <li class="nav-item">
-                <a class="nav-link" href="/user">User list</a>
+                <a class="nav-link" href="/user">ALL USERS LIST</a>
             </li>
             </#if>
             <#if user??>
             <li class="nav-item">
-                <a class="nav-link" href="/user/profile">Profile</a>
+                <a class="nav-link" href="/user/profile">PROFILE</a>
             </li>
             </#if>
         </ul>
