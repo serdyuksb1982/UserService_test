@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /**
  * @author Serdyuk S.B.
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Getter
 @Setter
-public class Message {
+public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -21,6 +22,7 @@ public class Message {
     @NotBlank(message = "Please fill the message")
     @Length(max = 2048, message = "Message to long (more than 2kB")
     private String text;
+
     @Length(max = 255, message = "Message too long (more than 255)")
     private String tag;
 

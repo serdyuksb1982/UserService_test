@@ -1,6 +1,7 @@
 package ru.serdeveloper.skllsApi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -9,10 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import ru.serdeveloper.skllsApi.domian.User;
+import ru.serdeveloper.skllsApi.domian.dto.CaptchaResponseDto;
 import ru.serdeveloper.skllsApi.service.UserService;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -20,8 +24,16 @@ import java.util.Map;
  */
 @Controller
 public class RegistrationController {
+
+    private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+
 
     @GetMapping("/registration")
     public String registration() {
@@ -35,9 +47,10 @@ public class RegistrationController {
                           BindingResult bindingResult,
                           Model model)
     {
+
         boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
 
-        if(isConfirmEmpty) {
+        if (isConfirmEmpty) {
             model.addAttribute("password2Error", "Password confirmation cannot be empty");
         }
 
