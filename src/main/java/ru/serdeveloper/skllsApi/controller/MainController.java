@@ -41,7 +41,10 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+    public String main(@RequestParam(required = false,
+            defaultValue = "") String filter,
+                       Model model)
+    {
         Iterable<Message> messages;
 
         if (filter != null && !filter.isEmpty()) {
@@ -64,6 +67,7 @@ public class MainController {
             Model model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+
         message.setAuthor(user);
 
         if (bindingResult.hasErrors()) {
@@ -86,7 +90,9 @@ public class MainController {
         return "redirect:/main";
     }
 
-    private void saveFile(@Valid Message message, @RequestParam("file") MultipartFile file) throws IOException {
+    private void saveFile(@Valid Message message,
+                          @RequestParam("file") MultipartFile file) throws IOException
+    {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -110,6 +116,7 @@ public class MainController {
             Model model,
             @RequestParam(required = false) Message message
     ) {
+        if (message == null) new Message();
         Set<Message> messages = user.getMessages();
 
         model.addAttribute("userChannel", user);
