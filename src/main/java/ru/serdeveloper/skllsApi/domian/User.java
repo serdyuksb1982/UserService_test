@@ -23,19 +23,22 @@ import java.util.Set;
 @Setter
 public class User implements UserDetails {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotBlank(message = "Username cannot be empty")
     private String username;
+
     @NotBlank(message = "Password cannot be empty")
     private String password;
+
     private boolean active;
 
     @Email(message = "Email is not correct")
     @NotBlank(message = "Email cannot be empty")
     private String email;
+
     private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -43,7 +46,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Message> messages;
 
     @ManyToMany
@@ -62,7 +65,6 @@ public class User implements UserDetails {
     )
     private Set<User> subscriptions = new HashSet<>();
 
-    public User() {}
 
     @Override
     public boolean equals(Object o) {

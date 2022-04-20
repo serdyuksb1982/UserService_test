@@ -31,7 +31,10 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model) {
+    public String userEditForm(
+            @PathVariable User user,
+            Model model)
+    {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
 
@@ -72,7 +75,8 @@ public class UserController {
     @GetMapping("subscribe/{user}")
     public String subscribe(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user) {
+            @PathVariable User user
+    ) {
         userService.subscribe(currentUser, user);
 
         return "redirect:/user-messages/" + user.getId();
@@ -81,9 +85,29 @@ public class UserController {
     @GetMapping("unsubscribe/{user}")
     public String unsubscribe(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user) {
+            @PathVariable User user
+    ) {
         userService.unsubscribe(currentUser, user);
 
         return "redirect:/user-messages/" + user.getId();
+    }
+
+    //mapping for subscribe
+    @GetMapping("{type}/{user}/list")
+    public String userList(
+            Model model,
+            @PathVariable User user,
+            @PathVariable String type
+    ) {
+        model.addAttribute("userChannel", user);
+        model.addAttribute("type", type);
+
+        if ("subscriptions".equals(type)) {
+            model.addAttribute("users", user.getSubscriptions());
+        } else {
+            model.addAttribute("users", user.getSubscribers());
+        }
+
+        return "subscriptions";
     }
 }

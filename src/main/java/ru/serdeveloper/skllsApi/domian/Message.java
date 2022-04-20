@@ -42,7 +42,7 @@ public class Message {
     }
 
     public String getAuthorName() {
-        return author != null ? author.getUsername() : "none";
+        return author != null ? author.getUsername() : "<none>";
     }
 
 }
