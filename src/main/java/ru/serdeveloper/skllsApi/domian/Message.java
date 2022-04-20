@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
+
 
 /**
  * @author Serdyuk S.B.
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-public class Message implements Serializable {
+public class Message {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
