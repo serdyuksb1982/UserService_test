@@ -6,3 +6,9 @@ create table user_subscriptions
     CONSTRAINT channel_id FOREIGN KEY (channel_id) REFERENCES usr(id),
     CONSTRAINT subscriber_id FOREIGN KEY (subscriber_id) REFERENCES usr(id)
 );
+
+--create table user_subscriptions (
+    --channel_id int8 not null references usr,
+    --subscriber_id int8 not null references usr,
+    --primary key (channel_id, subscriber_id)
+--)

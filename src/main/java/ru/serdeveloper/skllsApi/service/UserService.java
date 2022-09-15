@@ -115,7 +115,6 @@ public class UserService implements UserDetailsService {
 
         if (isEmailChanged) {
             user.setEmail(email);
-
             if (!StringUtils.isEmpty(email)) {
                 user.setActivationCode(UUID.randomUUID().toString());
             }
@@ -126,7 +125,6 @@ public class UserService implements UserDetailsService {
         }
 
         userRepo.save(user);
-
         if (isEmailChanged) {
             sendMessage(user);
         }
@@ -134,13 +132,11 @@ public class UserService implements UserDetailsService {
 
     public void subscribe(User currentUser, User user) {
         user.getSubscribers().add(currentUser);
-
         userRepo.save(user);
     }
 
     public void unsubscribe(User currentUser, User user) {
         user.getSubscribers().remove(currentUser);
-
         userRepo.save(user);
     }
 }
