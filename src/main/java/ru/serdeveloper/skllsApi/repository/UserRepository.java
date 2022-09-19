@@ -6,7 +6,7 @@ import ru.serdeveloper.skllsApi.domian.User;
 /**
  * @author Serdyuk S.B.
  */
-public interface UserRepo extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
     User findByActivationCode(String code);

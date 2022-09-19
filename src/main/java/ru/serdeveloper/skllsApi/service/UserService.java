@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ru.serdeveloper.skllsApi.domian.Role;
 import ru.serdeveloper.skllsApi.domian.User;
-import ru.serdeveloper.skllsApi.repository.UserRepo;
+import ru.serdeveloper.skllsApi.repository.UserRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,15 +19,18 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserService implements UserDetailsService {
-    @Autowired
-    private UserRepo userRepo;
 
-    @Autowired
-    private SmtpMailSendler mailSender;
+    private UserRepository userRepo;
 
-    @Autowired
+     private SmtpMailSendler mailSender;
+
     private  PasswordEncoder passwordEncoder;
 
+    private UserService(UserRepository repository, SmtpMailSendler sendler, PasswordEncoder encoder) {
+        this.userRepo = repository;
+        this.mailSender = sendler;
+        this.passwordEncoder = encoder;
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);

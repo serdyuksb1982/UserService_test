@@ -1,5 +1,6 @@
 package ru.serdeveloper.skllsApi.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 /**
  * @author Serdyuk S.B.
  */
+@Controller
 public class ControllerUtils {
 
     static Map<String, String> getErrors(BindingResult bindingResult) {

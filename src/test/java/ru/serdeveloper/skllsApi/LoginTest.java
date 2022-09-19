@@ -37,14 +37,14 @@ public class LoginTest {
         assertThat(controller).isNotNull();
     }
 
-    @Test
+    /*@Test
     public void testContextLoads() throws Exception {
         this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello!")))
                 .andExpect(content().string(containsString("Please, login")));
-    }
+    }*/
 
     @Test
     public void testLoginAccess() throws Exception {

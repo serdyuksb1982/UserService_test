@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.serdeveloper.skllsApi.domian.Message;
 import ru.serdeveloper.skllsApi.domian.User;
-import ru.serdeveloper.skllsApi.repository.MessageRepo;
+import ru.serdeveloper.skllsApi.repository.MessageRepository;
 
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,8 +30,9 @@ import java.util.UUID;
  */
 @Controller
 public class MainController {
+
     @Autowired
-    private MessageRepo messageRepo;
+    private MessageRepository messageRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -93,7 +95,7 @@ public class MainController {
     private void saveFile(@Valid Message message,
                           @RequestParam("file") MultipartFile file) throws IOException
     {
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
+        if (file != null && !Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
             File uploadDir = new File(uploadPath);
 
             if (!uploadDir.exists()) {
