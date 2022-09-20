@@ -34,5 +34,5 @@ alter table message
         foreign key (user_id) references usr (id);
 
 alter table user_role
-    add constraint user_role_user_fk
-        foreign key (user_id) references usr (id);
+  add constraint user_role_user_fk
+  foreign key (user_id) references usr (id);

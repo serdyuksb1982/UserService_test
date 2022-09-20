@@ -19,18 +19,14 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserService implements UserDetailsService {
-
+    @Autowired
     private UserRepository userRepo;
-
-     private SmtpMailSendler mailSender;
-
+    @Autowired
+    private SmtpMailSendler mailSender;
+    @Autowired
     private  PasswordEncoder passwordEncoder;
 
-    private UserService(UserRepository repository, SmtpMailSendler sendler, PasswordEncoder encoder) {
-        this.userRepo = repository;
-        this.mailSender = sendler;
-        this.passwordEncoder = encoder;
-    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
@@ -142,4 +138,5 @@ public class UserService implements UserDetailsService {
         user.getSubscribers().remove(currentUser);
         userRepo.save(user);
     }
+
 }
