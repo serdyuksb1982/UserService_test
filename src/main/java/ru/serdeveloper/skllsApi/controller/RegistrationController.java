@@ -27,13 +27,14 @@ public class RegistrationController {
 
     private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private RestTemplate restTemplate;
 
-
+    public RegistrationController(UserService userService, RestTemplate restTemplate) {
+        this.userService = userService;
+        this.restTemplate = restTemplate;
+    }
 
     @GetMapping("/registration")
     public String registration() {

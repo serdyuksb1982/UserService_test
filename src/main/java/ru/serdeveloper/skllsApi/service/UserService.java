@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ru.serdeveloper.skllsApi.domian.Role;
 import ru.serdeveloper.skllsApi.domian.User;
-import ru.serdeveloper.skllsApi.repository.UserRepo;
+import ru.serdeveloper.skllsApi.repository.UserRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,13 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
-    private UserRepo userRepo;
-
+    private UserRepository userRepo;
     @Autowired
     private SmtpMailSendler mailSender;
-
     @Autowired
     private  PasswordEncoder passwordEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -139,4 +138,5 @@ public class UserService implements UserDetailsService {
         user.getSubscribers().remove(currentUser);
         userRepo.save(user);
     }
+
 }
