@@ -33,11 +33,11 @@ import java.util.UUID;
  * @author Serdyuk S.B.
  */
 @Controller
-public class MainController {
+public class MessageController {
 
     private MessageRepository messageRepo;
 
-    public MainController(MessageRepository messageRepo) {
+    public MessageController(MessageRepository messageRepo) {
         this.messageRepo = messageRepo;
     }
 
@@ -125,7 +125,8 @@ public class MainController {
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user,
             Model model,
-            @RequestParam(required = false) Message message
+            @RequestParam(required = false) Message message,
+            @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable
     ) {
         if (message == null) new Message();
         Set<Message> messages = user.getMessages();
@@ -138,6 +139,7 @@ public class MainController {
         model.addAttribute("messages", messages);
         model.addAttribute("message", message);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
+        model.addAttribute("url", "/user-messages" + user.getId());
 
         return "userMessages";
     }
